@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  selector:
+    app: carrental-frontend
+  ports:
+    - protocol: TCP
+      port: 3000   # accessible on localhost:3000
+      targetPort: 80
+  type: NodePort   # exposes frontend outside cluster

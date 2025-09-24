@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: carrental-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: carrental-frontend
+  template:
+    metadata:
+      labels:
+        app: carrental-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: carrental-frontend:local
+          ports:
+            - containerPort: 80
+          env:
+            - name: VITE_BASE_URL
+              value: "http://carrental-backend:4000"

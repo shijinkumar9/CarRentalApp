@@ -13,8 +13,7 @@ export const changeRoleToOwner = async(req,res)=>{
         await User.findByIdAndUpdate(_id, {role:'owner'})
         res.json({success:true,message:"Now you can list cars"})
     } catch (error) {
-        console.log(error.message)
-        res.json({success:false, message:error.message})
+        res.status(500).json({success:false, message:'Internal server error'})
     }
 }
 
@@ -51,8 +50,7 @@ export const addCar = async(req, res)=>{
 
         res.json({success:true, message:"Car added successfully"})
     } catch (error) {
-        console.log(error.message)
-        res.json({success:false, message:error.message})
+        res.status(500).json({success:false, message:'Internal server error'})
     }
 }
 
@@ -67,8 +65,7 @@ export const getOwnerCars = async(req, res)=>{
         //console.log(cars)
         res.json({success:true, cars})
     } catch (error) {
-        console.log(error.message)
-        res.json({success:false, message:error.message})
+        res.status(500).json({success:false, message:'Internal server error'})
     }
 }
 
@@ -88,8 +85,7 @@ export const toggleCarAvailability = async(req, res)=>{
 
         res.json({success:true, message:"Car availability toggled"})
     } catch (error) {
-        console.log(error.message)
-        res.json({success:false, message:error.message})
+        res.status(500).json({success:false, message:'Internal server error'})
     }
 }
 
@@ -110,8 +106,7 @@ export const deleteCar = async(req, res)=>{
 
         res.json({success:true, message:"Car removed successfully"})
     } catch (error) {
-        console.log(error.message)
-        res.json({success:false, message:error.message})
+        res.status(500).json({success:false, message:'Internal server error'})
     }
 }
 
@@ -142,8 +137,7 @@ export const getDashboardData = async(req, res)=>{
 
         res.json({success:true, dashboardData})
     } catch (error) {
-        console.log(error.message)
-        res.json({success:false, message:error.message})
+        res.status(500).json({success:false, message:'Internal server error'})
     }
 }
 
@@ -179,8 +173,7 @@ export const updateUserImage =async(req,res)=>{
         await User.findByIdAndUpdate(_id, {image});
         res.json({success:true, message:"Image updated successfully"})
     } catch (error) {
-        console.log(error.message)
-        res.json({success:false, message:error.message})
+        res.status(500).json({success:false, message:'Internal server error'})
         
     }
 }
