@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./Server
+    container_name: carrental-backend
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./Server/.env   # Load your existing .env
+
+  frontend:
+    build: ./Client
+    container_name: carrental-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    environment:
+      - VITE_BASE_URL=http://backend:4000

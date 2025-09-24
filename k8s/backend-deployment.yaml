@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: carrental-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: carrental-backend
+  template:
+    metadata:
+      labels:
+        app: carrental-backend
+    spec:
+      containers:
+        - name: backend
+          image: carrental-backend:local   # build & load into minikube / docker-desktop
+          ports:
+            - containerPort: 4000
+          envFrom:
+            - secretRef:
+                name: backend-secret   # optional: for your .env variables

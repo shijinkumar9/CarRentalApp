@@ -2,6 +2,7 @@ import User from "../models/User.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import Car from "../models/Car.js"
+import config from "../configs/env.js"
 
 
 //generate JWT token
@@ -9,7 +10,7 @@ const generateToken = (userId)=>{
     const payload = {
         userId: userId
     }
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: '7d'})
+    const token = jwt.sign(payload, config.JWT_SECRET, {expiresIn: '7d'})
     return token
 }
 
@@ -38,8 +39,7 @@ export const registerUser = async (req,res)=>{
 
 
     }catch(e){
-        console.log(e.message)
-        res.json({success:false, message:e.message})
+        res.status(500).json({success:false, message:'Internal server error'})
     }
 }
 
@@ -61,8 +61,7 @@ export const loginUser = async(req,res)=>{
         const token = generateToken(user._id.toString())
         res.json({success:true, token})
     } catch (error) {
-        console.log(error.message)
-        res.json({success:false, message:error.message})
+        res.status(500).json({success:false, message:'Internal server error'})
     }
 } 
 
@@ -73,8 +72,7 @@ export const getUserData = async(req, res)=>{
         const {user} = req;
         res.json({success:true, user})
     } catch (error) {
-        console.log(error.message)
-        res.json({success:false, message:error.message})
+        res.status(500).json({success:false, message:'Internal server error'})
     }
 }
 
@@ -87,7 +85,6 @@ export const getCars = async(req, res)=>{
         }
         res.json({success:true, cars})
     } catch (error) {
-        console.log(error.message)
-        res.json({success:false, message:error.message})
+        res.status(500).json({success:false, message:'Internal server error'})
     }
 }
